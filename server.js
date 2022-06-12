@@ -1,16 +1,36 @@
 const express = require('express');
 const path = require('path');
-const app = express();
 const mehtodOverride = require('method-override');
+const {auth} = require('express-openid-connect');
+const multer = require('multer');
+
+const PORT = 8000;
+
+//.env connection
+require('dotenv').config();
+
+// init express app
+const app = express();
+
+//db connection
 require('./db/connection');
+
+
+
+
+//require routes
 const userRoutes = require('./routes/userRoute');
 const postRoutes = require('./routes/postRoute');
-const PORT = 8000;
+
+
+
 
 //ejs view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //end ejs view engine setup
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -18,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Routes
-app.use('/user', userRoutes);
+app.use(userRoutes);
 app.use('/post', postRoutes);
 
 

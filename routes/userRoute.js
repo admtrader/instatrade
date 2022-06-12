@@ -1,13 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/userController');
-const user = require('../models/user');
+const config = require('../config/auth0');
+const { auth } = require('express-openid-connect');
+const { requiresAuth } = require('express-openid-connect');
+
+router.use(auth(config));
 
 
-router.get('/', userCtrl.indexPage);
+// req.isAuthenticated is provided from the auth router
 
-router.get('/new', userCtrl.showNew);
+router.get('/', userCtrl.logInOut)
 
-router.post('/', userCtrl.createUser);
+router.get('/user/setup', requiresAuth(), userCtrl.createUser)
+
+router.get('/user/profile', requiresAuth(), userCtrl.profilePage);
+
+
+
+
 
 module.exports = router;

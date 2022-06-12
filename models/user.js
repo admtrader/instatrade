@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     name: String,
     username: String,
-    password: String,
+    email: String,
+    authId: String,
+    posts: []
 })
 
 const User = mongoose.model('User', userSchema);
