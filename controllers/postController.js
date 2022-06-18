@@ -12,8 +12,11 @@ const showNew = (req, res) => {
 
 const createPost = (req, res) => {
     console.log(req.body)
-    Post.create(req.body)
-    .then(post => res.redirect('/post'))
+    console.log(req.file)
+
+    // Post.create(req.body)
+    // .then(post => res.redirect('/post'))
+    res.redirect('/post')
 };
 
 const showOnePost = (req, res) => {

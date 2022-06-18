@@ -5,6 +5,9 @@
 <h3><%= post.date %> </h3>
 <br><br><br>
 <h5><%= post.body  %> </h5>
+<br><br>
+<img src="data:image/<%=post.image.imgFile.contentType%>;base64,<%=post.image.imgFile.data.toString('base64')%>" alt=""> 
+
 
 
 
