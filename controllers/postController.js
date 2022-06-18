@@ -1,5 +1,6 @@
 const express = require('express');
 const Post = require('../models/post');
+const User = require('../models/user');
 
 const indexPage = (req,res) => {
     Post.find({})
@@ -13,10 +14,26 @@ const showNew = (req, res) => {
 const createPost = (req, res) => {
     console.log(req.body)
     console.log(req.file)
-
-    // Post.create(req.body)
-    // .then(post => res.redirect('/post'))
-    res.redirect('/post')
+    let imgName = req.file.originalname;
+    let imgType = req.file.mimetype;
+    let imgData = req.file.buffer;
+    Post.create({
+        name: req.body.name,
+        date: req.body.date,    
+        body: req.body.body,
+        image: {
+            name:imgName,
+            imgFile: {
+                data: imgData,
+                contentType: imgType
+            }
+        }
+    })
+    .then(post => {
+        User.findOneAndUpdate({"email": req.oidc.user.email}, {$push: {post: post._id}})
+        .then(user => console.log(user))
+    })
+    .then(res.redirect('/post'));
 };
 
 const showOnePost = (req, res) => {
