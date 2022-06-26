@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const mehtodOverride = require('method-override');
+const methodOverride = require('method-override');
 const {auth} = require('express-openid-connect');
 const multer = require('multer');
 
@@ -24,12 +24,13 @@ const postRoutes = require('./routes/postRoute');
 
 
 
-
 //ejs view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //end ejs view engine setup
 
+//method override init
+app.use(methodOverride('_method'));
 
 
 app.use(express.json())

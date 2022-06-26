@@ -30,7 +30,7 @@ const createPost = (req, res) => {
         }
     })
     .then(post => {
-        User.findOneAndUpdate({"email": req.oidc.user.email}, {$push: {post: post._id}})
+        User.findOneAndUpdate({"email": req.oidc.user.email}, {$push: {posts: post._id}})
         .then(user => console.log(user))
     })
     .then(res.redirect('/post'));
