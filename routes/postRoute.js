@@ -14,7 +14,7 @@ router.get('/', postCtrl.indexPage);
 
 router.get('/new', requiresAuth(), postCtrl.showNew);
 
-router.post('/', upload.single('image'), postCtrl.createPost);
+router.post('/', postCtrl.createPost);
 
 router.get('/:id', postCtrl.showOnePost);
 

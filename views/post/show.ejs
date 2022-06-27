@@ -6,9 +6,7 @@
 <br><br><br>
 <h5><%= post.body  %> </h5>
 <br><br>
-<img src="data:image/<%=post.image.imgFile.contentType%>;base64,<%=post.image.imgFile.data.toString('base64')%>" alt=""> 
-
-
+<img src="<%= post.imageUrl %>" alt="">
 
 
 

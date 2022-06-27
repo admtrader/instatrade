@@ -3,6 +3,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const {auth} = require('express-openid-connect');
 const multer = require('multer');
+const cors = require('cors');
 
 const PORT = 8000;
 
@@ -11,6 +12,7 @@ require('dotenv').config();
 
 // init express app
 const app = express();
+app.use(cors());
 
 //db connection
 require('./db/connection');
