@@ -1,20 +1,15 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 const postCtrl = require('../controllers/postController');
-//Auth init
-const { auth } = require('express-openid-connect');
-const { requiresAuth } = require('express-openid-connect');
-// multer init
-const multer = require('multer');
-const storage = multer.memoryStorage();
-upload = multer({storage: storage})
+
 
 
 router.get('/', postCtrl.indexPage);
 
-router.get('/new', requiresAuth(), postCtrl.showNew);
+router.get('/new', postCtrl.showNew);
 
-router.post('/', postCtrl.createPost);
+router.post('/', passport.authenticate('jwt', { session: false }), postCtrl.createPost);
 
 router.get('/:id', postCtrl.showOnePost);
 

@@ -14,6 +14,7 @@ const showNew = (req, res) => {
 
 const createPost = (req, res) => {
     console.log(req.body)
+    console.log('FULL REQ', req)
     Post.create({
         name: req.body.name,
         date: req.body.date,    
