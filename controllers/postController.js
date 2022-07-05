@@ -13,8 +13,7 @@ const showNew = (req, res) => {
 }
 
 const createPost = (req, res) => {
-    console.log(req.body)
-    console.log('FULL REQ', req)
+    console.log("create post route hit")
     Post.create({
         name: req.body.name,
         date: req.body.date,    
@@ -22,11 +21,9 @@ const createPost = (req, res) => {
         imageUrl: req.body.imageUrl,
 
     })
-    // .then(post => {
-    //     User.findOneAndUpdate({"email": req.oidc.user.email}, {$push: {posts: post._id}})
-    //     .then(user => console.log(user))
-    
-    //.then(res.redirect('/post'));
+    .then(post => {
+        User.findOneAndUpdate({"email": req.user.email}, {$push: {posts: post._id}})
+        .then(user => console.log(user.posts))})
     .then(res.json('Post was created successfully'))
 };
 
