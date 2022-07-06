@@ -6,7 +6,11 @@ const Post = require('../models/post');
 const getProfile = (req, res) => {
   //need to change this to a db querry and populate the posts.
   console.log(req.user)
-  res.json(req.user)
+  User.findOne({ email: req.user.email })
+  .populate('posts')
+  .then(user => {
+    res.json(user)
+  })
 };
 
 

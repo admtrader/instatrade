@@ -29,18 +29,20 @@ const createPost = (req, res) => {
 
 const showOnePost = (req, res) => {
     Post.findById(req.params.id)
-    .then(post => res.render('post/show.ejs', {post}))
-    //.then(res.json(post))
+    //.then(post => res.render('post/show.ejs', {post}))
+    .then(post => res.json(post))
 }
 
 const deletePost = (req, res) => {
+    console.log('delete route hit')
+    console.log(req.params.id)
     Post.findByIdAndDelete(req.params.id)
-    .then(post => res.redirect('/post'))
-    //.then(res.json("Post was deleted"))
+    .then(res.send("Post was deleted"))
 }
 
 const updatePost = (req, res) => {
     Post.findByIdAndUpdate(req.params.id)
+    .then(res.send("post was updated succesfully"))
 }
 
 module.exports = {
