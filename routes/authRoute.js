@@ -22,7 +22,7 @@ router.post('/signup', (req, res, next) => {
   newUser.save()
     .then((user) => {
       console.log(user)
-      res.send('User Created Successfully');
+      res.json({ msg: 'User Created Successfully'});
     })
 });
 
