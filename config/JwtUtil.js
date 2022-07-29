@@ -11,6 +11,7 @@ function issueJWT(user) {
   const expiresIn = "1d";
   const payload = {
     sub: _id,
+    user: user,
     iat: Date.now()
   };
 
