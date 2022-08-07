@@ -13,9 +13,19 @@ const getProfile = (req, res) => {
   })
 };
 
+const updateProfile = (req, res) => {
+  console.log('route pinged')
+  console.log(req.user)
+  User.findByIdAndUpdate(req.user.id, req.body)
+  .then(user => {
+    User.findById(req.user.id)
+    .then(use => res.json(use))
+  })
+}
 
 
 
 module.exports = {
   getProfile,
+  updateProfile,
 }

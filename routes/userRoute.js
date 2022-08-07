@@ -5,6 +5,8 @@ const passport = require('passport');
 
 router.get('/profile', passport.authenticate('jwt', { session: false}), userCtrl.getProfile)
 
+router.put('/profile', passport.authenticate('jwt', { session: false}), userCtrl.updateProfile)
+
 
 
 
